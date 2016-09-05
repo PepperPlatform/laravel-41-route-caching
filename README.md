@@ -28,7 +28,7 @@ return array(
 	'providers' => array(
 		// ...
 
-		'MaartenStaa\Routing\RoutingServiceProvider',
+		'PepperPlatform\Routing\RoutingServiceProvider',
 
 	),
 
