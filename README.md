@@ -13,7 +13,7 @@ Using [Composer](http://getcomposer.org/), add the package to your `require` sec
 ```json
 {
 	"require": {
-		"maartenstaa/laravel-41-route-caching": "dev-master"
+		"pepperplatform/route-caching": "dev-master"
 	}
 }
 ```
