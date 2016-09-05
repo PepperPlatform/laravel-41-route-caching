@@ -1,5 +1,5 @@
 {
-    "name": "maartenstaa/laravel-41-route-caching",
+    "name": "pepperplatform/route-caching",
     "description": "This package allows you to cache your routes definitions, thereby speeding up each request.",
     "keywords": ["laravel", "route", "routes", "cache", "caching", "performance"],
     "require": {
@@ -18,12 +18,12 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "MaartenStaa\\Routing\\": "src/"
+            "PepperPlatform\\Routing\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MaartenStaa\\Routing\\": "tests/"
+            "PepperPlatform\\Routing\\": "tests/"
         }
     }
 }
