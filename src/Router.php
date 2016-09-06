@@ -68,6 +68,7 @@ class Router extends LaravelRouter
      * @param  string  $filename
      * @param  Closure $callback
      * @param  int     $cacheMinutes
+     * @param  string  $group
      * @return string
      */
     public function cache($filename, Closure $callback, $cacheMinutes = 1440, $group="")
