@@ -82,7 +82,7 @@ class Router extends LaravelRouter
             return null;
         }
 
-        $cacher = $this->container['cache'];
+        $cacher  = Cache::driver('file');
         $cacheKey = $this->getCacheKey($filename, $group);
 
         // Check if the current route group is cached.
