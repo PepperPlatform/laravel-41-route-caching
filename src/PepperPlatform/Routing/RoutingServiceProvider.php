@@ -35,7 +35,6 @@
  */
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Config;
 
 class RoutingServiceProvider extends ServiceProvider
 {
@@ -59,8 +58,8 @@ class RoutingServiceProvider extends ServiceProvider
         $this->app['router'] = $this->app->share(
             function ($app) {
 
-                if(Config::get('config.driver')){
-                    $cache = Cache::driver(Config::get('config.driver'));
+                if($this->app['config']->get('route-caching::driver')){
+                    $cache = Cache::driver($this->app['config']->get('route-caching::driver'));
                     $router = new Router($app['events'], $app, $cache);
                 }else{
                     $router = new Router($app['events'], $app);
