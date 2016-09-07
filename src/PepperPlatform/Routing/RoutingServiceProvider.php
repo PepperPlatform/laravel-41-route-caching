@@ -35,8 +35,8 @@
  */
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facedes\Config;
-use Illuminate\Support\Facedes\Cache;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
 
 class RoutingServiceProvider extends ServiceProvider
 {
