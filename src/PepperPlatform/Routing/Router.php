@@ -62,7 +62,7 @@ class Router extends LaravelRouter
     {
         parent::__construct($events, $container);
 
-        $this->cacher = $cacher ? $cacher : $this->container['cache'];
+        $this->cacher = $cacher;
         $this->routes = new RouteCollection;
     }
 
@@ -87,7 +87,7 @@ class Router extends LaravelRouter
             return null;
         }
 
-        $this->cacher  =  Cache::driver('file');
+        $this->cacher  =   $this->cacher ? $this->cacher : $this->container['cache'];
         $cacheKey = $this->getCacheKey($filename, $group);
 
         // Check if the current route group is cached.
@@ -118,6 +118,7 @@ class Router extends LaravelRouter
      */
     public function clearCache($filename)
     {
+        $this->cacher  =   $this->cacher ? $this->cacher : $this->container['cache'];
         $this->cacher->forget($this->getCacheKey($filename));
     }
 
