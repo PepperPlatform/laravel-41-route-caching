@@ -47,6 +47,9 @@ class RoutingServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Register the package configuration with the loader.
+        $this->app['config']->package('pepperplatform/route-caching', __DIR__.'/../config');
+
         $this->registerRouter();
     }
 
