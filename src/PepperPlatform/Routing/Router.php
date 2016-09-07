@@ -39,6 +39,7 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\Router as LaravelRouter;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 
 class Router extends LaravelRouter
 {
@@ -56,13 +57,11 @@ class Router extends LaravelRouter
      *
      * @param \Illuminate\Events\Dispatcher        $events
      * @param \Illuminate\Container\Container|null $container
-     * @param \Illuminate\Support\Facades\Cache $cacher
      */
-    public function __construct(Dispatcher $events, Container $container = null, Cache $cacher = null)
+    public function __construct(Dispatcher $events, Container $container = null)
     {
         parent::__construct($events, $container);
 
-        $this->cacher = $cacher;
         $this->routes = new RouteCollection;
     }
 
@@ -87,7 +86,7 @@ class Router extends LaravelRouter
             return null;
         }
 
-        $this->cacher  =   $this->cacher ? $this->cacher : $this->container['cache'];
+        $this->cacher  =   Config::get('route-caching::driver') ? $this->container['cache']->driver(Config::get('route-caching::driver')) : $this->container['cache'];
         $cacheKey = $this->getCacheKey($filename, $group);
 
         // Check if the current route group is cached.
@@ -118,7 +117,7 @@ class Router extends LaravelRouter
      */
     public function clearCache($filename)
     {
-        $this->cacher  =   $this->cacher ? $this->cacher : $this->container['cache'];
+        $this->cacher  =   Config::get('route-caching::driver') ? $this->container['cache']->driver(Config::get('route-caching::driver')) : $this->container['cache'];
         $this->cacher->forget($this->getCacheKey($filename));
     }
 
