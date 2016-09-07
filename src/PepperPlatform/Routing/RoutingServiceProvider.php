@@ -63,8 +63,8 @@ class RoutingServiceProvider extends ServiceProvider
         $this->app['router'] = $this->app->share(
             function ($app) {
 
-                if(Config::get('routes-caching::driver')){
-                    $cache = Cache::driver(Config::get('routes-caching::driver'));
+                if(Config::get('route-caching::driver')){
+                    $cache = Cache::driver(Config::get('route-caching::driver'));
                     $router = new Router($app['events'], $app, $cache);
                 }else{
                     $router = new Router($app['events'], $app);
