@@ -17,13 +17,13 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {
-            "PepperPlatform\\Routing\\": "src/"
+        "psr-0": {
+            "PepperPlatform\\Routing": "src/"
         }
     },
     "autoload-dev": {
-        "psr-4": {
-            "PepperPlatform\\Routing\\": "tests/"
+        "psr-0": {
+            "PepperPlatform\\Routing": "tests/"
         }
     }
 }

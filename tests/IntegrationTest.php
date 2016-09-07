@@ -1,4 +1,4 @@
-<?php namespace MaartenStaa\Routing;
+<?php namespace PepperPlatform\Routing;
 
 /**
  * Copyright (c) 2015 by Maarten Staa.
