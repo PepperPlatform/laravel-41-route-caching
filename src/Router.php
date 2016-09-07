@@ -49,16 +49,20 @@ class Router extends LaravelRouter
      */
     protected $cacheVersion = 'v1';
 
+    protected $cacher;
+
     /**
      * Create a new Router instance.
      *
      * @param \Illuminate\Events\Dispatcher        $events
      * @param \Illuminate\Container\Container|null $container
+     * @param \Illuminate\Support\Facades\Cache $cacher
      */
-    public function __construct(Dispatcher $events, Container $container = null)
+    public function __construct(Dispatcher $events, Container $container = null, Cache $cacher = null)
     {
         parent::__construct($events, $container);
 
+        $this->cacher = $cacher ? $cacher : $this->container['cache'];
         $this->routes = new RouteCollection;
     }
 
@@ -83,11 +87,11 @@ class Router extends LaravelRouter
             return null;
         }
 
-        $cacher  = Cache::driver('file');
+        $this->cacher  =  Cache::driver('file');
         $cacheKey = $this->getCacheKey($filename, $group);
 
         // Check if the current route group is cached.
-        if (($cache = $cacher->get($cacheKey)) !== null) {
+        if (($cache = $this->cacher->get($cacheKey)) !== null) {
             $this->routes->restoreRouteCache($cache);
         } else {
             // Back up current RouteCollection contents.
@@ -98,7 +102,7 @@ class Router extends LaravelRouter
 
             // Put routes in cache.
             $cache = $this->routes->getCacheableRoutes();
-            $cacher->put($cacheKey, $cache, $cacheMinutes);
+            $this->cacher->put($cacheKey, $cache, $cacheMinutes);
 
             // And restore the routes that shouldn't be cached.
             $this->routes->restoreRouteCollection();
@@ -114,9 +118,7 @@ class Router extends LaravelRouter
      */
     public function clearCache($filename)
     {
-        $cacher = $this->container['cache'];
-
-        $cacher->forget($this->getCacheKey($filename));
+        $this->cacher->forget($this->getCacheKey($filename));
     }
 
     /**
