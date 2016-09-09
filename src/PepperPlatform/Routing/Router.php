@@ -114,11 +114,12 @@ class Router extends LaravelRouter
      * Clear the cached data for the given routes file.
      *
      * @param string $filename
+     * @param string $group
      */
-    public function clearCache($filename)
+    public function clearCache($filename, $group = "")
     {
         $this->cacher  =   Config::get('route-caching::driver') ? $this->container['cache']->driver(Config::get('route-caching::driver')) : $this->container['cache'];
-        $this->cacher->forget($this->getCacheKey($filename));
+        $this->cacher->forget($this->getCacheKey($filename, $group));
     }
 
     /**
